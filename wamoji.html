@@ -1,0 +1,69 @@
+<html>
+<head>
+<style>
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.graph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;
+}
+.month {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+.bars {
+    display: flex;
+    flex-direction: row;
+    margin-right: 3px;
+    align-items: flex-end;
+    height: 100%;
+}
+.bars > div {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.bar {
+    background-color: lightgray;
+}
+.subbar {
+    border: 1px solid lime;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.firstname {
+    font-size: 0.6em;
+}
+</style>
+</head>
+<body>
+<div class="graph">
+  {% for mresult in data %}
+    <div class="month">
+    <div class="bars">
+    {% for fresult in mresult.data %}
+      <div>
+      <div class="bar" style="height: {{ fresult.total / ymax * 100 }}%;">
+        {% for smiley in fresult.data %}
+          <div class="subbar" style="height: {{ smiley.count / fresult.total * 100 }}%;">{{ smiley.smiley }}</div>
+        {% endfor %}
+      </div><span class="firstname">{{ fresult.firstname }}</span>
+      </div>
+    {% endfor %}
+    </div><span class="monthname">{{ mresult.month }}</span>
+    </div>
+  {% endfor %}
+</div>
+</body>
