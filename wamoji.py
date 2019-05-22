@@ -26,6 +26,7 @@ def data_form_line(line):
         date, _, hour, _, firstname = dataline[:5]
         if firstname.endswith(":"):
             firstname = firstname[:-1]
+        firstname = firstname[0]
         return get_tstamp(date, hour), firstname, get_smileys(line)
 
 
